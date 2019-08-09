@@ -2,9 +2,6 @@ FROM honeynet/droidbox
 
 LABEL maintainer="wrodriguezc@ucenfotec.ac.cr"
 
-#Update run file from parent container
-ADD run.sh /build/
-
 #Setup SSH server
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
@@ -35,6 +32,10 @@ COPY id_rsa.pub /root/
 RUN cat /root/id_rsa.pub >> /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN rm /root/id_rsa.pub
+
+# Create helper scripts
+WORKDIR /opt/droidbox
+COPY bin bin
 
 #SSH PORT
 EXPOSE 22
