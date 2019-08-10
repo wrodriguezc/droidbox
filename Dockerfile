@@ -33,6 +33,9 @@ RUN cat /root/id_rsa.pub >> /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN rm /root/id_rsa.pub
 
+#Load a new version of the main script
+COPY droidbox.py /opt/DroidBox_4.1.1/scripts
+
 # Create helper scripts
 WORKDIR /opt/droidbox
 COPY bin bin
